@@ -1,4 +1,4 @@
-int n = 250;
+int n = 50;
 Raindrops[] r = new Raindrops[n];
 Catcher c;
 
