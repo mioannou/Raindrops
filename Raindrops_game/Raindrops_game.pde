@@ -4,7 +4,7 @@ int oldTime = 0;
 int currentTime = 0;
 int timeChange = 0;
 int index = 0;
-Raindrops[] r = new Raindrops[150];
+Raindrops[] r = new Raindrops[1000];
 Catcher c;
 
 void setup() {
