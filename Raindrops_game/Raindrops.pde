@@ -13,8 +13,7 @@ class Raindrops {
     d=15;
   }
 
-  void display() {
-      noStroke();
+  void display() { //makes raindrops appear onscreen
       image(img1, loc.x, loc.y, d, d);
   } 
 
