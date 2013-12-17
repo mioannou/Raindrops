@@ -17,7 +17,7 @@ class Catcher {
 
   void catchDrop(Raindrops drop) {
     if (catchloc.dist(drop.loc) < d*.38 + drop.d/2) { //checks catcher to make sure it touches drops
-      drop.loc.set(width*10, -height); //moves raindrop to random location after contact
+      drop.loc.set(width*10,-height); //moves raindrop to random location after contact
       drop.vel.set(0, 0); //stops raindrop from moving after contact
       score++; //increases score when drop is caught
     }

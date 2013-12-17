@@ -27,6 +27,8 @@ void draw() {
     c.catchDrop(r[i]);
     if(r[i].loc.y >= height) {
     lives-=1;
+    r[i].loc.set(width*10,-height);
+    r[i].vel.set(0,0);
   }
   }
   currentTime = millis();
@@ -41,6 +43,13 @@ void draw() {
   c.displaycatch();
   text(score, width-scoreSize*1.25, height-scoreSize*1.15); //displays score on screen
   text("Lives:" + lives, 0, height-scoreSize*1.15);
+  if(lives <= 0){
+    background(0);
+    fill(255,0,0);
+    textAlign(CENTER);
+    textSize(80);
+    text("GAME OVER",width/2,height/2);
+  }
 
 }
 
