@@ -1,4 +1,4 @@
-boolean start;
+boolean start; //booleans determine what state the game is in
 boolean stop;
 int rectX;
 int rectY;
@@ -12,7 +12,6 @@ int currentTime = 0;
 int timeChange = 0;
 int index = 0; /*states which raindrop in the array 
  is being recognized*/
-
 Raindrops[] r = new Raindrops[300];
 Catcher c;
 
@@ -21,7 +20,7 @@ void setup() {
   stop = false;
   scoreSize = 30;
   size(500, 500);
-  for (int i = 0; i< r. length; i++) { //array of raindrops
+  for (int i = 0; i< r. length; i++) { //creates array of raindrops
     r[i] = new Raindrops();
   }
   c = new Catcher(); //creates a catcher
@@ -31,26 +30,26 @@ void setup() {
 }
 
 void draw() { 
-  if (start == false && stop == false) {
+  if (start == false && stop == false) { //establishes start screen
     background(0);
     fill(0, 0, 255);
     textAlign(CENTER);
     textSize(80);
     text("RAINDROPS", width/2, height/2);
     rectMode(CENTER);
-    rect(rectX, rectY, rectWidth, rectHeight);
+    rect(rectX, rectY, rectWidth, rectHeight); //start button
     fill(0);
     textSize(30);
     text("BEGIN", width/2, height/2+75);
   }
-  if (start == true && stop == false) {
+  if (start == true && stop == false) { //running game
     background(0, 0, 200);
     for (int i = 0; i < index; i ++) {
-      r[i].display();
-      r[i].move();
-      c.displaycatch();
-      c.catchDrop(r[i]);
-      if (r[i].loc.y >= height) {
+      r[i].display(); //shows raindrops
+      r[i].move(); //drops fall
+      c.displaycatch(); //shows catcher
+      c.catchDrop(r[i]); //catcher catches raindrops
+      if (r[i].loc.y >= height) { //score decreases if drops reach bottom
         lives-=1;
         r[i].loc.set(width*10, -height);
         r[i].vel.set(0, 0);
@@ -58,8 +57,8 @@ void draw() {
     }
     fill(255);
     textAlign(CORNER);
-    text("Lives:" + lives, 0, height-scoreSize*1.15);
-    text(score, width-scoreSize*1.25, height-scoreSize*1.15); //displays score on screen
+    text("Lives:" + lives, 0, height-scoreSize*1.15); //displays current lives on screen
+    text(score, width-scoreSize*1.25, height-scoreSize*1.15); //displays current score on screen
   }
   currentTime = millis();
   timeChange = currentTime - oldTime; 
@@ -70,17 +69,17 @@ void draw() {
       oldTime = currentTime;
     }
   } 
-  if (lives <= 0) {
+  if (lives <= 0) { //fail conditions
     stop = true;
   }
-  if (start == true && stop == true) {
+  if (start == true && stop == true) { //establishes game over screen
     background(0);
     fill(255, 0, 0);
     textAlign(CENTER);
     textSize(80);
     text("GAME OVER", width/2, height/2);
     rectMode(CENTER);
-    rect(rectX, rectY, rectWidth, rectHeight);
+    rect(rectX, rectY, rectWidth, rectHeight); //retry button
     fill(0);
     textSize(30);
     text("TRY AGAIN", width/2, height/2+75);
@@ -91,10 +90,10 @@ void mousePressed() {
   if (start == true && stop == true && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
     lives = 3;
     score = 0;
-    stop = false;
+    stop = false; //activate retry button when game is in game over state
   }
   if (start == false && stop == false && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
-    start = true;
+    start = true; //activate game when game is in start state
   }
 }
 
