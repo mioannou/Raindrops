@@ -57,6 +57,7 @@ void draw() {
       }
     }
     fill(255);
+    textAlign(CORNER);
     text("Lives:" + lives, 0, height-scoreSize*1.15);
     text(score, width-scoreSize*1.25, height-scoreSize*1.15); //displays score on screen
   }
