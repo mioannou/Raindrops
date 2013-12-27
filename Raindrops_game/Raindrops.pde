@@ -7,7 +7,7 @@ class Raindrops {
 
   Raindrops() {
     //giving values to variables 
-    img1 = loadImage("Raindrop.png"); 
+    img1 = loadImage("Raindrop.png");  
     loc = new PVector(random(width), d/2);
     vel = new PVector(0,2.5);
     d=15;

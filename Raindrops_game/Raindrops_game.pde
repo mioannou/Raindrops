@@ -51,9 +51,9 @@ void draw() {
       r[i].move(); //drops fall
       c.displaycatch(); //shows catcher
       c.catchDrop(r[i]); //catcher catches raindrops
-      if (r[i].loc.y >= height) { //score decreases if drops reach bottom
+      if (r[i].loc.y >= height) { //lives go down by one if drops reach bottom
         lives-=1;
-        r[i].loc.set(width*10, -height);
+        r[i].loc.set(width*10, -height); //sends raindrops to location far off screen, stops them
         r[i].vel.set(0, 0);
       }
     }
@@ -86,11 +86,11 @@ void draw() {
     textSize(30);
     text("TRY AGAIN", width/2, height/2+75);
   }
-  if (score >= 20) {
+  if (score >= 20) { //win conditions
     win = true;
   }
-  if(start == true && stop == false && win == true) { //win screen
-     background(0);
+  if (start == true && stop == false && win == true) { //win screen
+    background(0);
     fill(0, 255, 0);
     textAlign(CENTER);
     textSize(80);
@@ -100,12 +100,12 @@ void draw() {
     fill(0);
     textSize(30);
     text("PLAY AGAIN", width/2, height/2+75);
-  } 
+  }
 }
 
 void mousePressed() {
   if (start == true && stop == true && win == false && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
-    lives = 3;
+    lives = 3; //resets lives and score
     score = 0;
     stop = false; //activate retry button when game is in game over state
   }
@@ -115,7 +115,7 @@ void mousePressed() {
   if (start == true && stop == false && win == true && mouseX>rectX-rectWidth/2-10 && mouseX<rectX+rectWidth/2+10 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
     score = 0;
     lives = 3;
-    win = false;
+    win = false; //lets player play again after they win
   }
 }
 
