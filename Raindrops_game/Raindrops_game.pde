@@ -1,5 +1,6 @@
 boolean start; //booleans determine what state the game is in
 boolean stop;
+boolean win;
 int rectX;
 int rectY;
 int rectWidth = 160;
@@ -18,6 +19,7 @@ Catcher c;
 void setup() {
   start = false;
   stop = false;
+  win = false;
   scoreSize = 30;
   size(500, 500);
   for (int i = 0; i< r. length; i++) { //creates array of raindrops
@@ -30,7 +32,7 @@ void setup() {
 }
 
 void draw() { 
-  if (start == false && stop == false) { //establishes start screen
+  if (start == false && stop == false && win == false) { //establishes start screen
     background(0);
     fill(0, 0, 255);
     textAlign(CENTER);
@@ -42,7 +44,7 @@ void draw() {
     textSize(30);
     text("BEGIN", width/2, height/2+75);
   }
-  if (start == true && stop == false) { //running game
+  if (start == true && stop == false && win == false) { //running game
     background(0, 0, 200);
     for (int i = 0; i < index; i ++) {
       r[i].display(); //shows raindrops
@@ -72,7 +74,7 @@ void draw() {
   if (lives <= 0) { //fail conditions
     stop = true;
   }
-  if (start == true && stop == true) { //establishes game over screen
+  if (start == true && stop == true && win == false) { //establishes game over screen
     background(0);
     fill(255, 0, 0);
     textAlign(CENTER);
@@ -84,16 +86,36 @@ void draw() {
     textSize(30);
     text("TRY AGAIN", width/2, height/2+75);
   }
+  if (score >= 20) {
+    win = true;
+  }
+  if(start == true && stop == false && win == true) { //win screen
+     background(0);
+    fill(0, 255, 0);
+    textAlign(CENTER);
+    textSize(80);
+    text("YOU WIN", width/2, height/2);
+    rectMode(CENTER);
+    rect(rectX, rectY, rectWidth+10, rectHeight); //play again button
+    fill(0);
+    textSize(30);
+    text("PLAY AGAIN", width/2, height/2+75);
+  } 
 }
 
 void mousePressed() {
-  if (start == true && stop == true && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
+  if (start == true && stop == true && win == false && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
     lives = 3;
     score = 0;
     stop = false; //activate retry button when game is in game over state
   }
-  if (start == false && stop == false && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
+  if (start == false && stop == false && win == false && mouseX>rectX-rectWidth/2 && mouseX<rectX+rectWidth/2 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
     start = true; //activate game when game is in start state
+  }
+  if (start == true && stop == false && win == true && mouseX>rectX-rectWidth/2-10 && mouseX<rectX+rectWidth/2+10 && mouseY>rectY-rectHeight/2 && mouseY<rectY+rectHeight/2) {
+    score = 0;
+    lives = 3;
+    win = false;
   }
 }
 
