@@ -7,3 +7,7 @@ Raindrops Game:
 -If the player misses a drop with the catcher and it reaches the bottom, it is moved off-screen, and lives decrease by one
 -If the player loses all three lives, the game ends, with the option to start over available
 -If the player gains a score of twnety, the player wins, with the option to play again available
+
+
+Bugs:
+-The area of the catcher that actually will react to a drop is off-center, drops pass through the right side of the image, even though it appears to touch
